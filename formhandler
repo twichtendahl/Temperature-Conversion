@@ -1,0 +1,126 @@
+<?php
+    /* Form handler determines whether form was sent.
+       If so, processes form by validating data then
+       converting temperature.
+       If not, show form. */
+    
+    if(isset($_POST['Submit'])){//data submitted, show data
+        echo $_POST['Test'];
+    } else {//show form
+        echo '<form action="index.php" method="post">
+        <!-- User enters a temperature and unit of measurement -->
+        <!-- Get input temperature -->
+        <p><span class="error">* required field.</span></p>
+        <label for="temperature_input">Temperature:</label>
+        
+        <input id="temperature_start" name="temperature_start" type="text" />
+        
+        <select id="unit_start" name="unit_start" method="post">
+            <option value="fahrenheit" name="fahr">&deg;F</option>
+            <option value="celcius" name="calcius">&deg;C</option>
+            <option value="kelvin" name="kelvin">&deg;K</option>
+        </select>
+        
+        <!-- User designates a desired unit of measurement -->
+        <label for="unit_end">Desired Units: </label>
+        
+        <select id="unit_end" name="unit_end">
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="celcius">Celcius</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+        
+        <!-- Submit temperature conversion form -->
+        <input type="submit" id="submit" name="submit" value="Convert">  
+        
+    </form>';
+   }
+
+function fahrenheit_to_celsius($temperature_start)
+{
+    
+    $celsius = 5/9 * ($temperature_start - 32);
+    return $celsius;
+    
+}
+
+function fahrenheit_to_kelvin($temperature_start)
+{
+    
+    $kelvin = 5/9 * ((($temperature_start-32)/1.8) + 270);
+    return $kelvin;
+    
+}
+
+
+function celsius_to_fahrenheit($temperature_start)
+{
+    
+    $fahrenheit = 9/5 * ($temperature_start) + 32;
+    return $fahrenheit;
+    
+}
+
+function celsius_to_kelvin($temperature_start)
+{
+    
+    $kelvin = ($temperature_start)+273.15;
+    return $kelvin;
+    
+}
+
+function kelvin_to_fahrenheit($temperature_start)
+{
+    
+    $fahrenheit = (9/5* ($temperature_start) - 459.67);
+    return $fahrenheit;
+    
+}
+
+function kelvin_to_celsius($temperature_start)
+{
+    
+    $celsius = ($temperature_start - 273.15);
+    return $celsius;
+    
+}
+                if(isset($_POST['submit'])){
+                    $temperature_start = $_POST['temperature_start'];
+                    $selected_val = $_POST['unit_start'];
+                    $selected_val = $_POST['unit_end'];
+                        
+                        if($selected_val =='fahr'){
+                    
+                            $celsius = fahrenheit_to_celsius($temperature_start);
+                        
+                            echo "Fahrenheit $temperature_start = " . number_format($celsius,2). " Celsius";
+                            
+                            echo "<br />";
+                            $kelvin=fahrenheit_to_kelvin($temperature_start);
+                            
+                            echo "Fahrenheit $temperature_start = ". number_format($kelvin,2)." Kelvin";
+                        }
+                
+                   if($selected_val == 'celsius'){
+                    
+                        $fahrenheit = celsius_to_fahrenheit($temperature_start);
+                        echo "Celsius $temperature_start = ".number_format($fahrenheit,2)." Fahrenheit";
+                        echo "<br />";
+                        $kelvin=celsius_to_kelvin($temperature_start);
+                        
+                        echo "Celsius $temperature_start = ". number_format($kelvin,2)." Kelvin";
+                    
+                        }
+                    
+                    if($selected_val == 'kelvin'){
+                        
+                        $fahrenheit = kelvin_to_fahrenheit($temperate_start);
+                        echo "Kelvin $temperature_start = ".number_format($fahrenheit,2)." Fahrenheit";
+                        echo "<br />";
+                        $celsius = kelvin_to_celsius($temperature_start);
+                        echo "Kelvin $temperature_start = " . number_format($celsius,2). " Celsius";
+                        }
+                    
+                    
+                }
+?>    
