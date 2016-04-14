@@ -149,7 +149,7 @@
         echo '<form action="index.php" method="post">
         <!-- User enters a temperature and unit of measurement -->
         <label for="temperature_start">Temperature:</label>
-        <input id="temperature_start" name="temperature_start" type="text" />
+        <input id="temperature_start" name="temperature_start" type="text" /><span id="temperature_alert"></span>
         <select id="unit_start" name="unit_start">
             <option value="fahrenheit">&deg;F</option>
             <option value="celsius">&deg;C</option>
@@ -158,7 +158,7 @@
 
         <!-- User designates a desired unit of measurement -->
         <label for="unit_end">Desired Units: </label>
-        <select id="unit_end" name="unit_end">
+        <select id="unit_end" name="unit_end"><span id="unit_alert"></span>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="celsius">Celsius</option>
             <option value="kelvin">Kelvin</option>
@@ -168,6 +168,10 @@
         <input type="submit" id="submit" name="submit" value="Convert">  
     </form>';
     }
-    ?>    
+    ?>
+    
+    <!-- ******************* VALIDATION SCRIPTS ******************* -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="validation.js" type="text/javascript"></script>
 </body>
 </html>
